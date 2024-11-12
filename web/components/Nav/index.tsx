@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { loadFaqV2Styles } from "./styles";
-import { IFaqV2Props } from "./types";
+import { loadNavigationStyles } from "./styles";
+import { INavigationProps } from "./types";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,7 +12,7 @@ import {
 import React from "react";
 import {cn} from "@/lib/utils";
 
-export const Navigation = ({ items }: IFaqV2Props) => {
+export const Navigation = ({ items }: INavigationProps) => {
   const ListItem = React.forwardRef<
   React.ElementRef<"a">,
   React.ComponentPropsWithoutRef<"a">
@@ -38,7 +38,7 @@ export const Navigation = ({ items }: IFaqV2Props) => {
   );
 });
 ListItem.displayName = "ListItem";
-  const styles = loadFaqV2Styles();
+  const styles = loadNavigationStyles();
 
   return (
     <div className={styles.wrapper}>

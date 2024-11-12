@@ -1,4 +1,4 @@
-export interface IFaqV2Props {
+export interface INavigationProps {
   items: {
     title: string;
     href: string;
