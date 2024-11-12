@@ -24,3 +24,4 @@ model inputs {
   id    String @id @default(uuid())
   title String
 }
+
