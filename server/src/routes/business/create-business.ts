@@ -6,7 +6,7 @@ import { CreateDefaultQuestions } from "../../utils/create-default-questions";
 
 export async function CreateBusiness(app: FastifyInstance) {
   app.post("/business", async (request, reply) => {
-    const { name, city, phone, description, logo, position, email, password }: any = request.body;
+    const { name, city, phone, description, logo, position, email, password, urgency }: any = request.body;
     const business = await prisma.business.create({
       data: {
         name, 
@@ -17,6 +17,7 @@ export async function CreateBusiness(app: FastifyInstance) {
         position,
         email,
         password,
+        urgency
       }
     })
     let form = await CreateBusinessForm(business.id)
