@@ -1,51 +1,34 @@
 import { FastifyInstance } from "fastify";
-import { SplitPosition } from "../../utils/split-position";
+
 import { prisma } from "../../lib/prisma";
+import { SplitPosition } from "../../utils/split-position";
 
 export async function GetBusinessByLocation(app: FastifyInstance) {
   app.get("/business/:city/:position/:range", async (request, reply) => {
     const { position, city, range }: any = request.params;
-    const earthRadius = 6371;
-    let businesses = [];
+    const earthRadius = 6371; // Earth's radius in kilometers
 
-    // If city is empty or "0", fetch all businesses
-    if (city === "0" || city == null || city === "") {
-      businesses = await prisma.business.findMany();
-    } else {
-      businesses = await prisma.business.findMany({
-        where: { city },
-        orderBy: { urgency: "desc" },
-      });
+    let query: any = {}; // Create an empty query object
+
+    // Filter by city if provided (excluding empty or "0")
+    if (city && city !== "0" && city !== "") {
+      query.city = city;
     }
 
-    // If position is 0 or range is 0, return all businesses without distance filtering
-    if (position === "0" || range === "0") {
-      return reply.send(businesses);
+    // If range is provided (excluding "0"), consider it for filtering
+    if (range && range !== "0") {
+      query.position = {
+        near: SplitPosition(position), // Use SplitPosition for latitude/longitude
+        maxDistance: parseFloat(range) / earthRadius, // Convert distance to radians
+      };
     }
 
-    const businessesInRange = businesses.filter((b) => {
-      if (b.position) {
-        const [bLat, bLong] = SplitPosition(b.position); 
-        const [uLat, uLong] = SplitPosition(position); 
-
-        // Convert degrees to radians
-        const rad = (deg: any) => (deg * Math.PI) / 180;
-        const dLat = rad(bLat - uLat);
-        const dLon = rad(bLong - uLong);
-
-        // Haversine formula
-        const a =
-          Math.sin(dLat / 2) ** 2 +
-          Math.cos(rad(uLat)) * Math.cos(rad(bLat)) * Math.sin(dLon / 2) ** 2;
-
-        const distance =
-          2 * earthRadius * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-        return distance <= parseFloat(range); // Filter by radius
-      }
-      return false;
+    // Fetch businesses based on the constructed query
+    const businesses = await prisma.business.findMany({
+      where: query,
+      orderBy: { urgency: "desc" }, // Sort by urgency (optional)
     });
 
-    return reply.send(businessesInRange);
+    reply.send(businesses); // Send the fetched businesses
   });
 }
