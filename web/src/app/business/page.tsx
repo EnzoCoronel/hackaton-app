@@ -18,7 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 import { distances } from "../../../utils/distances";
 
@@ -107,7 +107,7 @@ export default function Business() {
 
   // Handle form submission
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
     fetchBusinessData(); // Fetch data based on selected parameters

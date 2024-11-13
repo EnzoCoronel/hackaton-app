@@ -1,21 +1,21 @@
-// app/business/[id]/page.tsx
-
 import { notFound } from "next/navigation";
 import { mockBusinesses } from "./data";
-import { Business } from "./types";
+import { Business, BusinessPageProps } from "./types";
 import Link from "next/link";
 import PixQRCodeGenerator from "@/components/pixQRCodeGenerator";
 
-async function getBusiness(id: string): Promise<Business | undefined> {
+function getBusiness(id: string): Business | undefined {
   return mockBusinesses.find((business) => business.id === id);
 }
 
-export default async function BusinessPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const business = await getBusiness(params.id);
+// async await version of above function
+// async function getBusiness(id: string): Promise<Business | undefined> {
+//   return mockBusinesses.find((business) => business.id === id);
+// }
+
+
+export default function BusinessPage({ params }: BusinessPageProps) {
+  const business = getBusiness(params.id);
 
   if (!business) {
     notFound();

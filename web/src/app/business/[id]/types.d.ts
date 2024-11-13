@@ -20,3 +20,7 @@ export interface Business {
   links: Link[];
   createdAt: Date;
 }
+
+export interface BusinessPageProps {
+  params: { id: string };
+}
