@@ -118,7 +118,6 @@ export default function Business() {
       <div className="flex flex-col space-y-2">
         <form onSubmit={handleSubmit} className="text-center py-5">
           {/* Distance Select */}
-          <h1>TESTETSETSET</h1>
           <Select onValueChange={(value) => setDistance(value)}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Selecione uma distância" />
