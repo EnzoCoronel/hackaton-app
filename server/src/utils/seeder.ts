@@ -1,6 +1,7 @@
 import { prisma } from "../lib/prisma";
 
 async function main() {
+  await prisma.business.deleteMany();
   await prisma.business.createMany({
     data: [
       {
