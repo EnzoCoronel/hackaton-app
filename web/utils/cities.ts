@@ -19,5 +19,5 @@ export enum Cities {
   SENTINELA_DO_SUL = "Sentinela do Sul",
   SERTAO_SANTANA = "Sertão Santana",
   TAPES = "Tapes",
-  TRIUNFO = "Triunfo"
+  TRIUNFO = "Triunfo",
 }

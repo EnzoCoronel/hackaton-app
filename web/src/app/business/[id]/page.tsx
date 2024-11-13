@@ -13,7 +13,6 @@ function getBusiness(id: string): Business | undefined {
 //   return mockBusinesses.find((business) => business.id === id);
 // }
 
-
 export default function BusinessPage({ params }: BusinessPageProps) {
   const business = getBusiness(params.id);
 

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
 import QRCode from "qrcode";
@@ -6,7 +6,7 @@ import { CreditCard } from "lucide-react"; // Import an icon from lucide-react
 
 // Define the props type, only requiring the pixKey
 interface PixQRCodeGeneratorProps {
-  pixKey: string;  // The Pix key used to generate the QR code
+  pixKey: string; // The Pix key used to generate the QR code
 }
 
 const PixQRCodeGenerator: React.FC<PixQRCodeGeneratorProps> = ({ pixKey }) => {
@@ -25,7 +25,7 @@ const PixQRCodeGenerator: React.FC<PixQRCodeGeneratorProps> = ({ pixKey }) => {
 
   // Function to calculate CRC16 for PIX code
   const calculateCRC16 = (data: string): string => {
-    let crc = 0xFFFF;
+    let crc = 0xffff;
     for (let i = 0; i < data.length; i++) {
       crc ^= data.charCodeAt(i) << 8;
       for (let j = 0; j < 8; j++) {
@@ -33,7 +33,7 @@ const PixQRCodeGenerator: React.FC<PixQRCodeGeneratorProps> = ({ pixKey }) => {
         else crc <<= 1;
       }
     }
-    return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, "0");
+    return (crc & 0xffff).toString(16).toUpperCase().padStart(4, "0");
   };
 
   // Generate the PIX QR Code Image
@@ -51,7 +51,7 @@ const PixQRCodeGenerator: React.FC<PixQRCodeGeneratorProps> = ({ pixKey }) => {
   return (
     <div className="pix-qr-container">
       <h2 className="text-xl font-bold text-center">QR CODE PIX</h2>
-      
+
       {/* Displaying the QR Code Image */}
       <div className="qr-code-container flex justify-center my-4">
         {qrCode ? (

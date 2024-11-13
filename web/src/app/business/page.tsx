@@ -110,14 +110,13 @@ export default function Business() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    fetchBusinessData(); 
+    fetchBusinessData();
   };
 
   return (
     <div className="md:px-52 py-12">
       <div className="flex flex-col space-y-2">
         <form onSubmit={handleSubmit} className="text-center py-3">
-    
           <Select onValueChange={(value) => setDistance(value)}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Selecione uma distância" />
@@ -134,7 +133,6 @@ export default function Business() {
             </SelectContent>
           </Select>
 
-
           <Select onValueChange={(value) => setCity(value)}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Selecione uma cidade" />
@@ -150,14 +148,16 @@ export default function Business() {
               </SelectGroup>
             </SelectContent>
           </Select>
-      
         </form>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 pt-6">
         {business.length > 0 ? (
           business.map((businessItem: any) => (
-            <Card key={businessItem.id} className="relative overflow-visible bg-[#E9F5FF]">
+            <Card
+              key={businessItem.id}
+              className="relative overflow-visible bg-[#E9F5FF]"
+            >
               <CardHeader>
                 {businessItem.urgency && (
                   <div className="absolute top-0 left-0 w-full py-2 px-2 font-bold text-center bg-yellow-300 transform -translate-y-1/2">
@@ -165,7 +165,11 @@ export default function Business() {
                   </div>
                 )}
 
-                <CardTitle><h1 className="font-semibold text-center">{businessItem.name}</h1></CardTitle>
+                <CardTitle>
+                  <h1 className="font-semibold text-center">
+                    {businessItem.name}
+                  </h1>
+                </CardTitle>
 
                 <CardDescription>
                   <img
