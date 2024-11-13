@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { mockBusinesses } from "./data";
 import { Business } from "./types";
 import Link from "next/link";
+import PixQRCodeGenerator from "@/components/pixQRCodeGenerator";
 
 async function getBusiness(id: string): Promise<Business | undefined> {
   return mockBusinesses.find((business) => business.id === id);
@@ -69,9 +70,47 @@ export default async function BusinessPage({
               )}
               {business.pixKey && (
                 <p>
-                  <strong>chave Pix:</strong> {business.pixKey}
+                  <strong>chave Pix:</strong>{" "}
+                  00020126360014BR.GOV.BCB.PIX0114+5551984706698520400005303986540510.005802BR5925Enzo
+                  da Silva Coronel Gar6009SAO PAULO62140510RMe5U8xJEz6304C9B9
                 </p>
               )}
+              <div className="hidden lg:block">
+                <PixQRCodeGenerator pixKey="00020126360014BR.GOV.BCB.PIX0114+5551984706698520400005303986540510.005802BR5925Enzo da Silva Coronel Gar6009SAO PAULO62140510RMe5U8xJEz6304C9B9" />
+              </div>
+              <h2>Vagas para Funcionários e Voluntários</h2>
+
+              <table>
+                <thead>
+                  <tr>
+                    <th>Tipo de Vaga</th>
+                    <th>Cargo</th>
+                    <th>Salário</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Funcionário</td>
+                    <td>Faxineiro</td>
+                    <td>R$ 1.500,00</td>
+                  </tr>
+                  <tr>
+                    <td>Funcionário</td>
+                    <td>Caixa</td>
+                    <td>R$ 900,00</td>
+                  </tr>
+                  <tr>
+                    <td>Voluntário</td>
+                    <td>Assistente de Marketing</td>
+                    <td>-</td>
+                  </tr>
+                  <tr>
+                    <td>Voluntário</td>
+                    <td>Encanador</td>
+                    <td>-</td>
+                  </tr>
+                </tbody>
+              </table>
               <p>
                 <strong>Emergencia:</strong> {business.urgency ? "Yes" : "No"}
               </p>
@@ -94,15 +133,15 @@ export default async function BusinessPage({
               </ul>
             </div>
             <a
-                href="https://wa.me/5551984706698?text=Tenho%20interesse%20em%20prestar%20serviço"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="lg:w-1/2 flex items-center justify-center gap-2 px-4 py-2 bg-green-500 text-white font-bold rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-green-600 animate-pulse"
-                style={{ animation: "flashy 2s infinite" }}
-              >
-                Chamar pelo whatsApp
-                <img alt="Chat on WhatsApp" src="/whatsAppWhite.svg" />
-              </a>
+              href="https://wa.me/5551984706698?text=Tenho%20interesse%20em%20prestar%20serviço"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="lg:w-1/2 flex items-center justify-center gap-2 px-4 py-2 bg-green-500 text-white font-bold rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-green-600 animate-pulse"
+              style={{ animation: "flashy 2s infinite" }}
+            >
+              Chamar pelo whatsApp
+              <img alt="Chat on WhatsApp" src="/whatsAppWhite.svg" />
+            </a>
             <p className="mt-6 text-gray-500 text-sm">
               Criado em: {business.createdAt.toDateString()}
             </p>
