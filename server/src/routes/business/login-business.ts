@@ -20,9 +20,9 @@ export function LoginBusiness(app: FastifyInstance){
 
     const hashedPassword = businessFromEmail[0].password;
 
-    // const isPasswordValid = await compare(password, hashedPassword);
+    const isPasswordValid = await compare(password, hashedPassword);
 
-    if (!hashedPassword) {
+    if (!isPasswordValid) {
       // Return a 401 Unauthorized error if the password is invalid
       return reply
         .status(401)
