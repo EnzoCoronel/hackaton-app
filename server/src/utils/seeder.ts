@@ -36,7 +36,6 @@ async function main() {
         city: " São Jerônimo",
         position: "-29.964986, -51.7116455",
       },
-      // Add more entries as needed
     ],
   });
   console.log("Seed data inserted successfully.");
