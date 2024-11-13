@@ -24,7 +24,7 @@ export default async function BusinessPage({
     <>
       <header className="w-full bg-sky-200 shadow-md">
         <nav className="max-w-5xl mx-auto flex justify-between items-center py-4 px-6">
-          <h1 className="text-2xl font-bold text-gray-800">acceesive</h1>
+          <h1 className="text-2xl font-bold text-gray-800">accesive</h1>
           <Link href="/" className="text-blue-500 underline">
             <img alt="Return Home" src="/home.svg" />
           </Link>
@@ -46,34 +46,34 @@ export default async function BusinessPage({
             <p className="text-gray-600 mb-4">{business.description}</p>
             <div className="text-gray-600">
               <p>
-                <strong>City:</strong> {business.city}
+                <strong>Cidade:</strong> {business.city}
               </p>
               <a
                 className="flex gap-3"
-                aria-label="Chat on WhatsApp"
-                href="https://wa.me/1XXXXXXXXXX"
+                aria-label="Chamar pelo whatsApp"
+                href="https://wa.me/5551984706698?text=Tenho%20interesse%20em%20prestar%20serviço"
               >
-                <strong> Phone:</strong>
+                <strong> Celular:</strong>
                 {business.phone}
                 <img alt="Chat on WhatsApp" src="/WhatsApp.svg" />
               </a>
               {business.position && (
                 <p>
-                  <strong>Position:</strong> {business.position}
+                  <strong>Coordenadas:</strong> {business.position}
                 </p>
               )}
               {business.pixText && (
                 <p>
-                  <strong>Pix Text:</strong> {business.pixText}
+                  <strong>Mensagem Pix:</strong> {business.pixText}
                 </p>
               )}
               {business.pixKey && (
                 <p>
-                  <strong>Pix Key:</strong> {business.pixKey}
+                  <strong>chave Pix:</strong> {business.pixKey}
                 </p>
               )}
               <p>
-                <strong>Urgency:</strong> {business.urgency ? "Yes" : "No"}
+                <strong>Emergencia:</strong> {business.urgency ? "Yes" : "No"}
               </p>
             </div>
             <div className="mt-4">
@@ -93,8 +93,18 @@ export default async function BusinessPage({
                 ))}
               </ul>
             </div>
+            <a
+                href="https://wa.me/5551984706698?text=Tenho%20interesse%20em%20prestar%20serviço"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="lg:w-1/2 flex items-center justify-center gap-2 px-4 py-2 bg-green-500 text-white font-bold rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-green-600 animate-pulse"
+                style={{ animation: "flashy 2s infinite" }}
+              >
+                Chamar pelo whatsApp
+                <img alt="Chat on WhatsApp" src="/whatsAppWhite.svg" />
+              </a>
             <p className="mt-6 text-gray-500 text-sm">
-              Created at: {business.createdAt.toDateString()}
+              Criado em: {business.createdAt.toDateString()}
             </p>
           </div>
         </div>
