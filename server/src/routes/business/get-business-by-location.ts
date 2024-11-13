@@ -1,34 +1,53 @@
 import { FastifyInstance } from "fastify";
-
-import { prisma } from "../../lib/prisma";
 import { SplitPosition } from "../../utils/split-position";
+import { prisma } from "../../lib/prisma";
 
 export async function GetBusinessByLocation(app: FastifyInstance) {
+  /*
+  - Frontend pede localizacao
+  - Frontend (JS) usa api nativa do JS Geolocation
+  - Frontend pega o resultado da api geolaction e envia para esta rota no backend
+  */
+
   app.get("/business/:city/:position/:range", async (request, reply) => {
     const { position, city, range }: any = request.params;
-    const earthRadius = 6371; // Earth's radius in kilometers
+    const earthRadius = 6371;
 
-    let query: any = {}; // Create an empty query object
+    const business = await (city == null
+      ? prisma.business.findMany()
+      : prisma.business.findMany({
+          where: { city },
+        })
+    );
 
-    // Filter by city if provided (excluding empty or "0")
-    if (city && city !== "0" && city !== "") {
-      query.city = city;
+    // se não tiver range e nem cidade especificada retornar tudo
+    if (range == 0) {
+      return reply.send(business);
     }
 
-    // If range is provided (excluding "0"), consider it for filtering
-    if (range && range !== "0") {
-      query.position = {
-        near: SplitPosition(position), // Use SplitPosition for latitude/longitude
-        maxDistance: parseFloat(range) / earthRadius, // Convert distance to radians
-      };
-    }
+    const businessesInRange = business.filter((b) => {
+      if (b.position) {
+        const [bLat, bLong] = SplitPosition(b.position); 
+        const [uLat, uLong] = SplitPosition(position); 
 
-    // Fetch businesses based on the constructed query
-    const businesses = await prisma.business.findMany({
-      where: query,
-      orderBy: { urgency: "desc" }, // Sort by urgency (optional)
+        // Converter graus para radianos
+        const rad = (deg: any) => (deg * Math.PI) / 180;
+        const dLat = rad(bLat - uLat);
+        const dLon = rad(bLong - uLong);
+
+        // Formula Harversine
+        const a =
+          Math.sin(dLat / 2) ** 2 +
+          Math.cos(rad(uLat)) * Math.cos(rad(bLat)) * Math.sin(dLon / 2) ** 2;
+
+        const distance =
+          2 * earthRadius * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        return distance <= parseFloat(range);
+      }
+      return false;
     });
 
-    reply.send(businesses); // Send the fetched businesses
+    return reply.send(businessesInRange);
   });
 }

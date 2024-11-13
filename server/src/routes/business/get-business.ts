@@ -5,7 +5,9 @@ export async function GetBusiness(app: FastifyInstance){
   app.get("/business", async (request, reply) => {
     const business = await prisma.business.findMany({
       take: 8,
-      orderBy: { urgency: "desc" },
+      orderBy: {
+        createdAt: "desc"
+      }
     });
     return reply.send(business);
   });

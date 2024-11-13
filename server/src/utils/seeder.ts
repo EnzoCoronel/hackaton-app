@@ -1,12 +1,19 @@
 import { prisma } from "../lib/prisma";
+import { CreateBusinessForm } from "./create-business-form";
 
 async function main() {
+
   await prisma.business.deleteMany();
-  await prisma.business.createMany({
+  await prisma.question.deleteMany();
+
+ const bussines = await prisma.business.createMany({
     data: [
       {
         id: "8ea9dcf9-e413-4d60-a65f-505c26cecd17",
+        email: "1@gmail.com",
+        password: "123456",
         name: "Sorvete Gelado",
+        phone: "912341234",
         logo: "https://www.designi.com.br/images/preview/10425424.jpg",
         description: "Sorvete mais gostoso da região",
         city: "Charqueadas",
@@ -14,7 +21,10 @@ async function main() {
       },
       {
         id: "6fde4fb9-a5d8-4050-b969-d642002d48fa",
+        email: "2@gmail.com",
+        password: "123456",
         name: "Ateliê Gráfico",
+        phone: "912341234",
         logo: "https://scontent.fpoa33-2.fna.fbcdn.net/v/t39.30808-1/300672401_530044555564677_5340190607726412077_n.jpg?stp=dst-jpg_s480x480&_nc_cat=103&ccb=1-7&_nc_sid=f4b9fd&_nc_ohc=a8QYBt9G1zYQ7kNvgGN3rVu&_nc_zt=24&_nc_ht=scontent.fpoa33-2.fna&_nc_gid=Ay5TI914ZYvIOt0mISnyrRc&oh=00_AYBN_jsSqHAbyeClzuYmXcFIeaVOOrTCgZDSMVItr8_ZcA&oe=6739F1BC",
         description: "Xerox e impressões no melhor preço",
         city: "Charqueadas",
@@ -22,7 +32,10 @@ async function main() {
       },
       {
         id: "15bff3c3-2166-4e32-a422-dd12896ed59c",
+        email: "3@gmail.com",
+        password: "123456",
         name: "Coffee Shop",
+        phone: "912341234",
         logo: "https://t4.ftcdn.net/jpg/04/83/16/09/360_F_483160952_bYB2DOjUdsuB33gTXodCnnn8qDMxtSkl.jpg",
         description: "Café mais gostoso da região",
         city: "Charqueadas",
@@ -30,16 +43,21 @@ async function main() {
       },
       {
         id: "f40992b5-933d-4655-9fa2-7bf52f7d0e5a",
+        email: "4@gmail.com",
+        password: "123456",
         name: "Henrique Lopes Lanches",
+        phone: "912341234",
         logo: "https://mir-s3-cdn-cf.behance.net/projects/404/5d28ed194318911.65fa27c78bb09.png",
         description: "Xerox e impressões no melhor preço",
-        city: " São Jerônimo",
+        city: "São Jerônimo",
         position: "-29.964986, -51.7116455",
       },
     ],
   });
+
   console.log("Seed data inserted successfully.");
 }
+
 
 main()
   .catch((e) => {
