@@ -42,16 +42,28 @@ async function main() {
         position: "-29.9547831, -51.6248894",
       },
       {
-        id: "f40992b5-933d-4655-9fa2-7bf52f7d0e5a",
-        email: "4@gmail.com",
+        id: "39c345a8-7918-47a1-8cea-cae58cbe82ef",
+        name: "Toy Shop",
+        city: "Charqueadas",
+        email: "toyshop3@gmail.com",
         password: "123456",
-        name: "Henrique Lopes Lanches",
-        phone: "912341234",
-        logo: "https://mir-s3-cdn-cf.behance.net/projects/404/5d28ed194318911.65fa27c78bb09.png",
-        description: "Xerox e impressões no melhor preço",
-        city: "São Jerônimo",
-        position: "-29.964986, -51.7116455",
+        phone: "51912341234",
+        description: "Melhor loja de brinquedos de Charqueadas",
+        logo: "https://img.freepik.com/vetores-gratis/projeto-de-fonte-para-loja-de-brinquedos-de-palavra-com-muitos-brinquedos_1308-42318.jpg",
+        position: "-29.9647004, -51.6147256",
+        urgency: true
       },
+      {
+         id: "8e6490c0-9abc-498a-8d99-899adc3be851",
+        name: "Xis do Bom",
+        city: "São Jerônimo",
+        email: "toyshop3@gmail.com",
+        password: "123456",
+        phone: "51912341234",
+        description: "Melhor loja de brinquedos de Charqueadas",
+        position: "-29.9639185, -51.7226042",
+        urgency: true
+      }
     ],
   });
 
