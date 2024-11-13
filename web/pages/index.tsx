@@ -56,7 +56,7 @@ export default function Home() {
 
   return (
     <>
-      <nav>
+      <nav className="drop-shadow-2xl border-b border-black bg-blue-100">
         <div>NOME HACKATON</div>
         <Navigation items={components} />
       </nav>
