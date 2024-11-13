@@ -14,13 +14,23 @@ datasource db {
 }
 
 model Business {
-  id           String  @id @default(uuid())
-  name         String
-  logo         String?
-  description  String
-  localization String
+  id          String  @id @default(uuid())
+  name        String
+  logo        String?
+  description String
+  city        String
+  position    String?
+  links       Link[]
 
   Form Form?
+}
+
+model Link {
+  id         String    @id @default(uuid())
+  title      String
+  url        String
+  Business   Business? @relation(fields: [businessId], references: [id])
+  businessId String?
 }
 
 model Form {
@@ -52,4 +62,3 @@ model Question {
   formId      String?
   Answer      Answer[]
 }
-
