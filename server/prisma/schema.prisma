@@ -14,13 +14,20 @@ datasource db {
 }
 
 model Business {
-  id          String  @id @default(uuid())
+  id          String   @id @default(uuid())
   name        String
   logo        String?
+  email       String   @unique
+  password    String
   description String
   city        String
+  phone       String
   position    String?
+  pixText     String?
+  pixKey      String?
+  urgency     Boolean  @default(false)
   links       Link[]
+  createdAt   DateTime @default(now())
 
   Form Form?
 }
@@ -61,4 +68,8 @@ model Question {
   Form        Form?    @relation(fields: [formId], references: [id])
   formId      String?
   Answer      Answer[]
+}
+
+model Jobs {
+  id String @id @default(uuid())
 }

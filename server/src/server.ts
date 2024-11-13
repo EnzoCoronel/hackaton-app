@@ -1,32 +1,33 @@
-import Fastify from 'fastify'
-import { prisma } from './lib/prisma'
+import Fastify from "fastify";
+import { prisma } from "./lib/prisma";
+import { SplitPosition } from "./utils/split-position";
+import { GetBusiness } from "./routes/business/get-business";
+import { GetBusinessByLocation } from "./routes/business/get-business-by-location";
+import { CreateBusiness } from "./routes/business/create-business";
+import fastifyCors from "@fastify/cors";
+import fasitfyJwt from '@fastify/jwt'
+import { createAnswer } from "./routes/answer/create-answer";
+import { LoginBusiness } from "./routes/business/login-business";
+const app = Fastify();
+require('dotenv').config();
 
-const app = Fastify()
+app.get("/", async (request, reply) => {
+  return reply.send("oi");
+});
 
-app.get('/', async (request, reply) => {
-    return reply.send("oi")
+app.register(fastifyCors)
+app.register(fasitfyJwt, {
+  secret: "1231241251251",
 })
+// Business
+app.register(GetBusiness);
+app.register(GetBusinessByLocation);
+app.register(CreateBusiness)
+app.register(LoginBusiness)
 
-app.get('/business', async (request, reply) => {
-  const business = await prisma.business.findMany();
-  return reply.send(business)
-})
+// Answer
+app.register(createAnswer);
 
-app.get('/close/business/:city/:lat/:long', async (request, reply) => {
-  const {city, lat, long}: any = request.params;
-
-  const business = await prisma.business.findMany({
-    where: {
-       city,
-    }
-  })
-
-  if(business){
-    
-  }
-
-})
-
-app.listen({port: 3000}).then(() => {
-  console.log("HTTP server running")
-})
+app.listen({ port: 3001 }).then(() => {
+  console.log("HTTP server running");
+});
