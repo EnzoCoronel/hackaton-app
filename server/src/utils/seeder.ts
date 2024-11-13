@@ -45,7 +45,7 @@ async function main() {
         id: "39c345a8-7918-47a1-8cea-cae58cbe82ef",
         name: "Toy Shop",
         city: "Charqueadas",
-        email: "toyshop3@gmail.com",
+        email: "toyshop4@gmail.com",
         password: "123456",
         phone: "51912341234",
         description: "Melhor loja de brinquedos de Charqueadas",

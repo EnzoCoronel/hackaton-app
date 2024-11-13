@@ -3,7 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [name, setName] = useState("");
@@ -13,6 +14,7 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const [description, setDescription] = useState("");
   const [logo, setLogo] = useState("");
+  const [position, setPosition] = useState<string | null>(null); // Default location
   // position
 
   const [loading, setLoading] = useState(false);
@@ -22,8 +24,17 @@ export default function Home() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-    
-    const data = { name, email, city, phone, password, description, logo };
+
+    const data = {
+      name,
+      email,
+      city,
+      phone,
+      password,
+      description,
+      logo,
+      position,
+    };
 
     try {
       const res = await fetch("http://localhost:3001/business", {
@@ -37,15 +48,27 @@ export default function Home() {
       const result = await res.json();
       setResponse(result.message);
     } catch (error) {
-      
     } finally {
       setLoading(false);
     }
   };
 
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setPosition(
+            `${position.coords.latitude}, ${position.coords.longitude}`
+          );
+        },
+        (error) => console.error("Geolocation error:", error)
+      );
+    }
+  }, []);
+
   return (
     <div className="px-52 py-10">
-      <h1>Submit Form</h1>
+      <h1>Cadastro de Empresa</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <Label htmlFor="name">Nome</Label>
@@ -123,7 +146,7 @@ export default function Home() {
             placeholder="Digite uma descrição"
           />
         </div>
-    
+
         {/* <div className="mb-4">
           <Label htmlFor="description">descrição</Label>
           <Input
