@@ -132,54 +132,49 @@ export default function Business() {
                 <SelectValue placeholder="Selecione uma distância" />
               </SelectTrigger>
 
-              <SelectContent>
-                <SelectGroup>
-                  {Object.entries(distances).map(([label, value]) => (
-                    <SelectItem key={value} value={value}>
-                      {label}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <SelectContent>
+              <SelectGroup>
+                {Object.entries(distances).map(([label, value]) => (
+                  <SelectItem key={value} value={value}>
+                    {label}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+
 
             <Select onValueChange={(value) => setCity(value)}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Selecione uma cidade" />
               </SelectTrigger>
 
-              <SelectContent>
-                <SelectGroup>
-                  {Object.entries(Cities).map(([label, value]) => (
-                    <SelectItem key={value} value={value}>
-                      {value}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </form>
-        </div>
+            <SelectContent>
+              <SelectGroup>
+                {Object.entries(Cities).map(([label, value]) => (
+                  <SelectItem key={value} value={value}>
+                    {value}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+      
+        </form>
+      </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 pt-6">
-          {business.length > 0 ? (
-            business.map((businessItem: any) => (
-              <Card
-                key={businessItem.id}
-                className="relative overflow-visible bg-[#E9F5FF]"
-              >
-                <CardHeader>
-                  {businessItem.urgency && (
-                    <div className="absolute top-0 left-0 w-full py-2 px-2 font-bold text-center bg-yellow-300 transform -translate-y-1/2">
-                      EMERGÊNCIA
-                    </div>
-                  )}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 pt-6">
+        {business.length > 0 ? (
+          business.map((businessItem: any) => (
+            <Card key={businessItem.id} className="relative overflow-visible bg-[#E9F5FF]">
+              <CardHeader>
+                {businessItem.urgency && (
+                  <div className="absolute top-0 left-0 w-full py-2 px-2 font-bold text-center bg-yellow-300 transform -translate-y-1/2">
+                    EMERGÊNCIA
+                  </div>
+                )}
 
-                  <CardTitle>
-                    <h1 className="font-semibold text-center">
-                      {businessItem.name}
-                    </h1>
-                  </CardTitle>
+                <CardTitle><h1 className="font-semibold text-center">{businessItem.name}</h1></CardTitle>
 
                   <CardDescription>
                     <img

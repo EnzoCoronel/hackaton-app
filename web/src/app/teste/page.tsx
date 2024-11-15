@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import cookies from "js-cookie";
-import Link from "next/link";
+import { useEffect, useState } from 'react';
+import cookies from 'js-cookie';
 
 export default function Page() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

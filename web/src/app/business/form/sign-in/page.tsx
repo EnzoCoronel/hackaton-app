@@ -36,9 +36,7 @@ export default function Home() {
       });
 
       const { token } = await res.json();
-
-      cookies.set("token", token, { expires: 60 * 60 });
-      router.push('/teste')
+      cookies.set('token', token, {expires: 60 * 60})
     } catch (error) {
     } finally {
       setLoading(false);

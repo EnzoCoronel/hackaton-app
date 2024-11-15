@@ -23,7 +23,7 @@ export default function Home() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-    
+
     const data = { name, email, city, phone, password, description, logo };
 
     try {
@@ -38,7 +38,6 @@ export default function Home() {
       const result = await res.json();
       setResponse(result.message);
     } catch (error) {
-      
     } finally {
       setLoading(false);
     }
@@ -134,7 +133,7 @@ export default function Home() {
             placeholder="Digite uma descrição"
           />
         </div>
-    
+
         {/* <div className="mb-4">
           <Label htmlFor="description">descrição</Label>
           <Input
