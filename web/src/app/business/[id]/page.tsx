@@ -13,7 +13,6 @@ function getBusiness(id: string): Business | undefined {
 //   return mockBusinesses.find((business) => business.id === id);
 // }
 
-
 export default function BusinessPage({ params }: BusinessPageProps) {
   const business = getBusiness(params.id);
 
@@ -23,15 +22,15 @@ export default function BusinessPage({ params }: BusinessPageProps) {
 
   return (
     <>
-      <header className="w-full bg-sky-200 shadow-md">
+      <header className="w-full bg-slate-200 shadow-md">
         <nav className="max-w-5xl mx-auto flex justify-between items-center py-4 px-6">
-          <h1 className="text-2xl font-bold text-gray-800">accesive</h1>
+          <h1 className="text-2xl font-bold text-blue-600">accesive</h1>
           <Link href="/" className="text-blue-500 underline">
             <img alt="Return Home" src="/home.svg" />
           </Link>
         </nav>
       </header>
-      <div className="flex flex-col items-center p-6 bg-gray-50 min-h-screen">
+      <div className="flex flex-col items-center p-6  min-h-screen">
         <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg overflow-hidden">
           {business.logo && (
             <img

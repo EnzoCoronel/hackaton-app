@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Home() {
@@ -45,6 +46,16 @@ export default function Home() {
 
   return (
     <div className="px-52 py-10">
+      <div>
+      <header className="w-full bg-slate-200 shadow-md">
+        <nav className="max-w-5xl mx-auto flex justify-between items-center py-4 px-6">
+          <h1 className="text-2xl font-bold text-blue-600">accesive</h1>
+          <Link href="/" className="text-blue-500 underline">
+            <img alt="Return Home" src="/home.svg" />
+          </Link>
+        </nav>
+      </header>
+      </div>
       <h1>Submit Form</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">

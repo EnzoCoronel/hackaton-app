@@ -8,6 +8,7 @@ import fastifyCors from "@fastify/cors";
 import fasitfyJwt from '@fastify/jwt'
 import { createAnswer } from "./routes/answer/create-answer";
 import { LoginBusiness } from "./routes/business/login-business";
+import { GetBusinessById } from "./routes/business/get-business-by-id";
 const app = Fastify();
 require('dotenv').config();
 
@@ -24,6 +25,7 @@ app.register(GetBusiness);
 app.register(GetBusinessByLocation);
 app.register(CreateBusiness)
 app.register(LoginBusiness)
+app.register(GetBusinessById)
 
 // Answer
 app.register(createAnswer);
